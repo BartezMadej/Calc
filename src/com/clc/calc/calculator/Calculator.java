@@ -15,7 +15,7 @@ public class Calculator
 		this.equation = new StringBuilder(equation);
 	}
 
-	public double singleOperatorOperations(char operator, double val1, double val2)
+	public double arithmeticOperations(char operator, double val1, double val2)
 	{
 		switch (operator)
 		{
@@ -109,7 +109,7 @@ public class Calculator
 				while ((c = operatorsStack.popOperator()) != '(')
 				{
 					var = numbersStack.popNumber();
-					numbersStack.pushNumber(singleOperatorOperations(c, numbersStack.popNumber(), var));
+					numbersStack.pushNumber(arithmeticOperations(c, numbersStack.popNumber(), var));
 				}
 
 			} else
@@ -117,7 +117,7 @@ public class Calculator
 				while (operatorPriority(c) <= operatorPriority(operatorsStack.topOperator()))
 				{
 					var = numbersStack.popNumber();
-					numbersStack.pushNumber(singleOperatorOperations(operatorsStack.popOperator(), var, numbersStack.popNumber()));
+					numbersStack.pushNumber(arithmeticOperations(operatorsStack.popOperator(), var, numbersStack.popNumber()));
 				}
 				operatorsStack.pushOperator(c);
 				while ((c = this.equation.charAt(i)) == '(')
@@ -132,7 +132,7 @@ public class Calculator
 		while (!operatorsStack.isEmpty())
 		{
 			var = numbersStack.popNumber();
-			numbersStack.pushNumber(singleOperatorOperations(operatorsStack.popOperator(), numbersStack.popNumber(), var));
+			numbersStack.pushNumber(arithmeticOperations(operatorsStack.popOperator(), numbersStack.popNumber(), var));
 		}
 		var = numbersStack.popNumber();
 		numbersStack.clearStack();
