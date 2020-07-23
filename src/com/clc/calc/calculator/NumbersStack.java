@@ -24,4 +24,8 @@ public class NumbersStack {
 		return numbersStack.empty();
 	}
 
+	public void clearStack() {
+		numbersStack.clear();
+	}
+
 }
