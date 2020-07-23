@@ -17,7 +17,7 @@ public class NumbersStack {
 		return numbersStack.pop();
 	}
 
-	public Double topNumber() {
+	public double topNumber() {
 		return numbersStack.peek();
 	}
 
