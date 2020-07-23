@@ -1,20 +1,24 @@
 package com.clc.calc.calculator;
 
 
-public class Calculator {
+public class Calculator
+{
 	private StringBuilder equation;
 	private NumbersStack numbersStack;
 	private OperatorsStack operatorsStack;
 
-	public Calculator(String equation) {
+	public Calculator(String equation)
+	{
 		numbersStack = new NumbersStack();
 		operatorsStack = new OperatorsStack();
 		equation = equation.replaceAll("\\s", "");
 		this.equation = new StringBuilder(equation);
 	}
 
-	public double singleOperatorOperations(char operator, double val1, double val2) {
-		switch (operator) {
+	public double singleOperatorOperations(char operator, double val1, double val2)
+	{
+		switch (operator)
+		{
 			case '-':
 				return val1 - val2;
 			case '+':
@@ -33,9 +37,11 @@ public class Calculator {
 		}
 	}
 
-	public double getNumber() {
+	public double getNumber()
+	{
 		int negative = 1;
-		if (equation.charAt(0) == '-') {
+		if (equation.charAt(0) == '-')
+		{
 			negative = -1;
 			equation.deleteCharAt(0);
 		}
@@ -44,10 +50,12 @@ public class Calculator {
 		while (i < equation.length() && Character.isDigit(equation.charAt(i)))
 			res = res * 10 + (equation.charAt(i++) - 48);
 
-		if (i < equation.length() && equation.charAt(i) == '.') {
+		if (i < equation.length() && equation.charAt(i) == '.')
+		{
 			double coef = 0.1;
 			int counter = 0;
-			while (Character.isDigit(equation.charAt(++i)) && i < equation.capacity()) {
+			while (Character.isDigit(equation.charAt(++i)) && i < equation.capacity())
+			{
 				res = res + coef * (equation.charAt(i) - 48);
 				coef /= 10;
 				++counter;
@@ -59,13 +67,16 @@ public class Calculator {
 		return res;
 	}
 
-	public void setEquation(String equation) {
+	public void setEquation(String equation)
+	{
 		this.equation.setLength(0);
 		this.equation.append(equation.replaceAll("\\s", ""));
 	}
 
-	public int operatorPriority(char value) {
-		switch (value) {
+	public int operatorPriority(char value)
+	{
+		switch (value)
+		{
 			case '(':
 			case ')':
 				return 1;
@@ -82,28 +93,35 @@ public class Calculator {
 		}
 	}
 
-	public double computeEquation() {
+	public double computeEquation()
+	{
 		char c;
 		int i = 0;
 		double var = 0.0;
 
 		if (Character.isDigit(this.equation.charAt(i)))
 			numbersStack.pushNumber(getNumber());
-		while (i < this.equation.length() && operatorsStack.isOperator((c = this.equation.charAt(i)))) {
+		while (i < this.equation.length() && operatorsStack.isOperator((c = this.equation.charAt(i))))
+		{
 			this.equation.deleteCharAt(i);
-			if (c == ')') {
-				while ((c = operatorsStack.popOperator()) != '(') {
+			if (c == ')')
+			{
+				while ((c = operatorsStack.popOperator()) != '(')
+				{
 					var = numbersStack.popNumber();
 					numbersStack.pushNumber(singleOperatorOperations(c, numbersStack.popNumber(), var));
 				}
 
-			} else {
-				while (operatorPriority(c) <= operatorPriority(operatorsStack.topOperator())) {
+			} else
+			{
+				while (operatorPriority(c) <= operatorPriority(operatorsStack.topOperator()))
+				{
 					var = numbersStack.popNumber();
 					numbersStack.pushNumber(singleOperatorOperations(operatorsStack.popOperator(), var, numbersStack.popNumber()));
 				}
 				operatorsStack.pushOperator(c);
-				while ((c = this.equation.charAt(i)) == '(') {
+				while ((c = this.equation.charAt(i)) == '(')
+				{
 					operatorsStack.pushOperator(c);
 					this.equation.deleteCharAt(i);
 				}
@@ -111,7 +129,8 @@ public class Calculator {
 			}
 
 		}
-		while (!operatorsStack.isEmpty()) {
+		while (!operatorsStack.isEmpty())
+		{
 			var = numbersStack.popNumber();
 			numbersStack.pushNumber(singleOperatorOperations(operatorsStack.popOperator(), numbersStack.popNumber(), var));
 		}

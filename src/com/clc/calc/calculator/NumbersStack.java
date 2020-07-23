@@ -12,7 +12,8 @@ public class NumbersStack {
 		numbersStack.push(value);
 	}
 
-	public double popNumber() {
+	public double popNumber()
+	{
 		return numbersStack.pop();
 	}
 
