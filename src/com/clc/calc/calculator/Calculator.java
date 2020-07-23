@@ -41,10 +41,10 @@ public class Calculator {
 		}
 		int i = 0;
 		double res = 0.0;
-		while (i < equation.length() && Character.isDigit(equation.charAt(i)) )
+		while (i < equation.length() && Character.isDigit(equation.charAt(i)))
 			res = res * 10 + (equation.charAt(i++) - 48);
 
-		if (i< equation.length() && equation.charAt(i) == '.') {
+		if (i < equation.length() && equation.charAt(i) == '.') {
 			double coef = 0.1;
 			int counter = 0;
 			while (Character.isDigit(equation.charAt(++i)) && i < equation.capacity()) {
@@ -89,7 +89,7 @@ public class Calculator {
 
 		if (Character.isDigit(this.equation.charAt(i)))
 			numbersStack.pushNumber(getNumber());
-		while (i<this.equation.length() && operatorsStack.isOperator((c = this.equation.charAt(i)))) {
+		while (i < this.equation.length() && operatorsStack.isOperator((c = this.equation.charAt(i)))) {
 			this.equation.deleteCharAt(i);
 			if (c == ')') {
 				while ((c = operatorsStack.popOperator()) != '(') {
@@ -103,17 +103,17 @@ public class Calculator {
 					numbersStack.pushNumber(singleOperatorOperations(operatorsStack.popOperator(), var, numbersStack.popNumber()));
 				}
 				operatorsStack.pushOperator(c);
-				while((c=this.equation.charAt(i))== '(') {
+				while ((c = this.equation.charAt(i)) == '(') {
 					operatorsStack.pushOperator(c);
 					this.equation.deleteCharAt(i);
 				}
-					numbersStack.pushNumber(getNumber());
+				numbersStack.pushNumber(getNumber());
 			}
 
 		}
 		while (!operatorsStack.isEmpty()) {
 			var = numbersStack.popNumber();
-			numbersStack.pushNumber(singleOperatorOperations(operatorsStack.popOperator(), numbersStack.popNumber(),var));
+			numbersStack.pushNumber(singleOperatorOperations(operatorsStack.popOperator(), numbersStack.popNumber(), var));
 		}
 		var = numbersStack.popNumber();
 		numbersStack.clearStack();
