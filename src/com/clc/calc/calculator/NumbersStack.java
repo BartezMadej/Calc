@@ -12,7 +12,8 @@ public class NumbersStack {
 		numbersStack.push(value);
 	}
 
-	public double popNumber() {
+	public double popNumber()
+	{
 		return numbersStack.pop();
 	}
 
@@ -22,6 +23,10 @@ public class NumbersStack {
 
 	public boolean isEmpty() {
 		return numbersStack.empty();
+	}
+
+	public void clearStack() {
+		numbersStack.clear();
 	}
 
 }
