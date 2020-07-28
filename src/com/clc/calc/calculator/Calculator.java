@@ -54,7 +54,7 @@ public class Calculator
 		{
 			double coef = 0.1;
 			int counter = 0;
-			while (Character.isDigit(equation.charAt(++i)) && i < equation.capacity())
+			while (++i < equation.length() && Character.isDigit(equation.charAt(i)))
 			{
 				res = res + coef * (equation.charAt(i) - 48);
 				coef /= 10;
@@ -101,7 +101,7 @@ public class Calculator
 
 		if (Character.isDigit(this.equation.charAt(i)))
 			numbersStack.pushNumber(getNumber());
-		while (i < this.equation.length() && operatorsStack.isOperator((c = this.equation.charAt(i))))
+		while (i < this.equation.length() && OperatorsStack.isOperator((c = this.equation.charAt(i))))
 		{
 			this.equation.deleteCharAt(i);
 			if (c == ')')
@@ -117,7 +117,7 @@ public class Calculator
 				while (operatorPriority(c) <= operatorPriority(operatorsStack.topOperator()))
 				{
 					var = numbersStack.popNumber();
-					numbersStack.pushNumber(arithmeticOperations(operatorsStack.popOperator(), var, numbersStack.popNumber()));
+					numbersStack.pushNumber(arithmeticOperations(operatorsStack.popOperator(), numbersStack.popNumber(),var));
 				}
 				operatorsStack.pushOperator(c);
 				while ((c = this.equation.charAt(i)) == '(')
