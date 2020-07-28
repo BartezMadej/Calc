@@ -38,7 +38,7 @@ public class OperatorsStack
 		operatorsStack.clear();
 	}
 
-	public boolean isOperator(char value)
+	public static boolean isOperator(char value)
 	{
 		return value == '-' || value == '+' || value == '*' || value == '/' || value == '^' || value == '(' || value == ')';
 	}
