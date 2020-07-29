@@ -99,7 +99,7 @@ public class Calculator
 		int i = 0;
 		double var = 0.0;
 
-		if (Character.isDigit(this.equation.charAt(i)))
+		if (Character.isDigit(this.equation.charAt(i)) || this.equation.charAt(i)=='-')
 			numbersStack.pushNumber(getNumber());
 		while (i < this.equation.length() && OperatorsStack.isOperator((c = this.equation.charAt(i))))
 		{
