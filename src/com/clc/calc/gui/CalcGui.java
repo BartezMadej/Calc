@@ -19,8 +19,9 @@ public class CalcGui
 	private final JTextField text;
 	private final DigitAndOperatorListener actionListener;
 	private final KeyListener keyListener;
+	public static CalcGui instance;
 
-	public CalcGui()
+	private CalcGui()
 	{
 		calc = new Calculator("");
 		actionListener = new DigitAndOperatorListener();
@@ -41,6 +42,13 @@ public class CalcGui
 		panel.setFocusable(true);
 		panel.requestFocusInWindow();
 		frame.setContentPane(panel);
+	}
+
+	public static CalcGui createGui()
+	{
+		if (instance == null)
+			instance = new CalcGui();
+		return instance;
 	}
 
 	public void setTextEditAndScroll()
